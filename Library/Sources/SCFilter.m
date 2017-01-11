@@ -110,7 +110,7 @@
     return filter;
 }
 
-- (id)_unwrappedValue:(id)value forKey:(NSString *)key {    
+- (id)_unwrappedValue:(id)value forKey:(NSString *)key {
     id unwrappedValue = [_unwrappedValues objectForKey:key];
     
     return unwrappedValue == nil ? value : unwrappedValue;
@@ -216,7 +216,7 @@
             CIVector *vector = value;
             NSMutableArray *vectorData = [NSMutableArray new];
             [vectorData addObject:key];
-
+            
             for (int i = 0; i < vector.count; i++) {
                 CGFloat value = [vector valueAtIndex:i];
                 [vectorData addObject:[NSNumber numberWithDouble:(double)value]];
@@ -311,18 +311,18 @@
             [self setParameterValue:value forKey:animation.key];
         }
     }
-
+    
     CIImage *overlayImage = _overlayImage;
     if (overlayImage != nil) {
         image = [overlayImage imageByCompositingOverImage:image];
     }
-
+    
     CIFilter *ciFilter = _CIFilter;
-
+    
     if (ciFilter == nil) {
         return image;
     }
-
+    
     [ciFilter setValue:image forKey:kCIInputImageKey];
     return [ciFilter valueForKey:kCIOutputImageKey];
 }
@@ -389,8 +389,8 @@
         obj = nil;
         if (error != nil) {
             *error = [NSError errorWithDomain:@"FilterDomain" code:200 userInfo:@{
-                                                                      NSLocalizedDescriptionKey : @"Invalid serialized class type"
-                                                                      }];
+                                                                                  NSLocalizedDescriptionKey : @"Invalid serialized class type"
+                                                                                  }];
         }
     }
     
@@ -424,7 +424,7 @@
 + (SCFilter *)filterWithCIImage:(CIImage *)image {
     SCFilter *filter = [SCFilter emptyFilter];
     filter.overlayImage = image;
-
+    
     return filter;
 }
 
@@ -476,7 +476,7 @@ static UInt32 MagicJPG = 0xe0ffd8ff;
     }
     
     UInt8 *bitmapPtr = bitmap;
-
+    
     int z = 0;
     for (int row = 0; row <  rowNum; row++) {
         for (int y = 0; y < n; y++) {
@@ -526,13 +526,13 @@ static UInt32 MagicJPG = 0xe0ffd8ff;
     }
     
     CGContextRef context = CGBitmapContextCreate(bitmap,
-                                     width,
-                                     height,
-                                     8,
-                                     bytesPerRow,
-                                     colorSpace,
-                                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
-   
+                                                 width,
+                                                 height,
+                                                 8,
+                                                 bytesPerRow,
+                                                 colorSpace,
+                                                 (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
+    
     CGColorSpaceRelease(colorSpace);
     
     if (context == nil) {
